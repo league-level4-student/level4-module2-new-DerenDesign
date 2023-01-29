@@ -1,5 +1,15 @@
 package _06_Console_Store;
 
+import java.awt.datatransfer.SystemFlavorMap;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import _02_Generics_Store.Cart;
+import _02_Generics_Store.Cereal;
+import _02_Generics_Store.Food;
+import _02_Generics_Store.*;
+
 public class ConsoleStore {
 
     /*
@@ -37,7 +47,35 @@ public class ConsoleStore {
      */
 
     public static void main(String[] args) {
-
+    	Cart<Food> cart = new Cart<Food>();
+    	int money = 100;
+    	Scanner scanner = new Scanner(System.in);
+    	int number = 0;
+    	boolean shopping = true;
+    	do {
+    		System.out.println("What foods would you like to buy: 1: Candy - $10 2: Cereal - $5");
+    		number = scanner.nextInt();
+    		scanner.nextLine();
+    		if(number == 1) {
+    			money = money -10;
+    			cart.add(new Candy());
+    		}
+    		if(number == 2) {
+    			money = money - 5;
+    			cart.add(new Cereal());
+    		}
+    		System.out.println("Would you like to keep shopping?");
+    		String answer = scanner.nextLine();
+    		if(answer.equalsIgnoreCase("Yes")) {
+    			shopping = true;
+    		}
+    		else {
+    			shopping = false;
+    		}
+    	} while(shopping);
+    	scanner.close();
+    	System.out.println("You spent $" + (100 - money));
+    	cart.showCart();
     }
 
 }
